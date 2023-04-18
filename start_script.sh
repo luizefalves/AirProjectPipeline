@@ -13,9 +13,9 @@ if [[ "$runit" != "True" && "$runit" != "False" ]]; then
   exit 1
 fi
 
-# Run 'docker-compose up' or not based on input
+# Run 'docker-compose up' or not 
 if [ "$runit" == "True" ]; then
-  docker-compose up -d "$image_name" 
+  docker-compose up -d "$image_name" && docker-compose up airflow-init && docker-compose up
 else
   echo "Ok!"
 fi
