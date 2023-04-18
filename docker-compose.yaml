@@ -187,7 +187,6 @@ services:
   airflow-init:
     <<: *airflow-common
     entrypoint: /bin/bash
-    # yamllint disable rule:line-length
     command:
       - -c
       - |
@@ -250,7 +249,9 @@ services:
         mkdir -p /sources/logs /sources/dags /sources/plugins
         chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
         exec /entrypoint airflow version
+
     # yamllint enable rule:line-length
+
     environment:
       <<: *airflow-common-env
       _AIRFLOW_DB_UPGRADE: 'true'
@@ -278,6 +279,7 @@ services:
   # You can enable flower by adding "--profile flower" option e.g. docker-compose --profile flower up
   # or by explicitly targeted on the command line e.g. docker-compose up flower.
   # See: https://docs.docker.com/compose/profiles/
+
   flower:
     <<: *airflow-common
     command: celery flower
@@ -299,7 +301,10 @@ services:
   db:
     image: postgres:13-alpine
     restart: always
-    hostname: datasource
+    networks:
+      teste1_default:
+        aliases:
+          - datasource
     ports: 
      - "5433:5433"
     volumes:
@@ -310,14 +315,17 @@ services:
       POSTGRES_DB: example_db
 
   flask:
-    build: ./dags/dependencies/load  # Specifies the current directory as the build context for the Flask service
+    build: ./dags/dependencies/load  
     restart: always
     ports:
-      - "8081:8081"  # Maps host's port 8081 to container's port 8081
-      #- "5432:5432"
+      - "8081:8081"  
     volumes:
       - ./dags/dependencies/load:/app
 
 
 volumes:
   postgres-db-volume:
+
+networks:
+  teste1_default:
+    external: true

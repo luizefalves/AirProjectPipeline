@@ -56,7 +56,7 @@ def get_widgets():
         dbname="nbadb",
         user="example_user",
         password="example_password",
-        host="172.18.0.2",
+        host="datasource",
         port="5432"
     )
     cursor = conn.cursor()
@@ -82,7 +82,7 @@ def db_init():
         dbname="nbadb",
         user="example_user",
         password="example_password",
-        host="172.18.0.2",
+        host="datasource",
         port="5432"
     )
     cursor = conn.cursor()

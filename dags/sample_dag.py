@@ -18,20 +18,7 @@ def _tables_extraction():
     return
 
 def run_flask_app():
-    # Use subprocess to call the Flask application's app.py file
     subprocess.run(['python', 'dependencies/load/app.py'])
-
-
-
-# Print PostgreSQL details
-# print("PostgreSQL server information")
-# print(conn.get_dsn_parameters(), "\n")
-# # Executing a SQL query
-# cur.execute("SELECT version();")
-# # Fetch result
-# record = cur.fetchone()
-# print("You are connected to - ", record, "\n")
-# print("-------------- \n")
 
 
 with DAG(

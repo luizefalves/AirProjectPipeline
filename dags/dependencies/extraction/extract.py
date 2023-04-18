@@ -9,7 +9,6 @@ def read_sql(cur,conn):
         filename = f'/opt/airflow/dags/dependencies/extraction/sql/{file}'
         with open(filename, 'r') as f:
             sql_query = f.read()
-        # Execute the SQL query
         cur.execute(sql_query)
     # Commit the changes to the database and close the cur and conn
     conn.commit()

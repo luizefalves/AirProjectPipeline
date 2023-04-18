@@ -1,4 +1,10 @@
 
+    ----- README NOT MADE YET -----
+
+    --> START WITH "python project_starter.py"
+    
+    
+    
     div_rank - This is a ranking of the team within its division based on its win-loss record compared to other teams in the same division. The NBA has six divisions, and each division has five teams.
 
     pts_rank - This is a ranking of the team's scoring offense based on the average number of points the team scores per game. The ranking is determined by comparing the team's scoring average to that of other teams in the league.

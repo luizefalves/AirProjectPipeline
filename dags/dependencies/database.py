@@ -3,9 +3,9 @@ import psycopg2
 class DatabaseConnector:
     _instance = None
 
-    def __new__(cls, database='nbadb', user='example_user', password='example_password', host='172.18.0.2', port='5432'):
+    def __new__(cls, database='nbadb', user='example_user', password='example_password', host='datasource', port='5432'):
         """
-        Singleton pattern implementation to ensure only one instance of DatabaseConnector is created
+        Singleton  implementation to ensure only one instance of DatabaseConnector is created
         """
         if cls._instance is None:
             cls._instance = super().__new__(cls)

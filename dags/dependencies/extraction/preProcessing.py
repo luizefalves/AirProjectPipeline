@@ -11,7 +11,7 @@ from dependencies.database import DatabaseConnector
 #     conn = psycopg2.connect(database='nbadb',
 #                         user='example_user',
 #                         password='example_password', 
-#                         host='172.18.0.2', port='5432')
+#                         host='datasource', port='5432')
   
 
 #     conn.autocommit = True
@@ -66,7 +66,7 @@ def main():
     
     - Finally, closes the connection. 
     """
-    #cur, conn = create_database()
+
     # Create an instance of DatabaseConnector 
     db_connector = DatabaseConnector()
 
