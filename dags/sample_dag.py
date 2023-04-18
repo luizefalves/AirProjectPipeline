@@ -65,19 +65,6 @@ with DAG(
         sql='dependencies/transformation/sql/join_transform.sql'
     )
 
-    # run_docker_transform = BashOperator(
-    #     task_id='docker_build_image',
-    #     bash_command='docker build -t your_docker_image_name .'
-    # )
-
-    # docker_task = DockerOperator(
-    #     task_id='docker_task_id',
-    #     image='your_docker_image_name',  # Specify the name of the Docker image you pushed to the container registry
-    #     api_version='auto',
-    #     auto_remove=True,
-    #     dag=dag,
-    # )
-
     flask_container = PythonOperator(
         task_id='flask_container_build',
         python_callable=run_flask_app,
