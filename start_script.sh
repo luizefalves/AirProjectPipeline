@@ -5,7 +5,7 @@ read -p "Enter the name of the database image (default: postgres:13-alpine): " i
 image_name=${image_name:-"postgres:13-alpine"}
 
 # Read boolean input to decide whether to run 'docker-compose up'
-read -p "Do you want to run 'docker-compose up' ? (True/False): " logging
+read -p "Do you want to run 'docker-compose up' ? (True/False): " runit
 
 # Check if runit input is valid 
 if [[ "$runit" != "True" && "$runit" != "False" ]]; then
