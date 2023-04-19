@@ -2,22 +2,31 @@ from airflow import DAG
 from airflow.models import Connection
 from airflow import settings
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from dependencies.extraction.preProcessing import main as main_tables
 from dependencies.extraction.extract import main as main_extraction
 from datetime import datetime
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 import subprocess
+import configparser
+
+# Read the configuration file
+config = configparser.ConfigParser()
+config.read('/opt/airflow/dags/settings.cfg')
+
+# Get the database login information
+database_host = config.get('database', 'host')
+database_port = config.getint('database', 'port')
+database_database = config.get('database', 'database')
+database_user = config.get('database', 'user')
+database_password = config.get('database', 'password')
+
+if 'database' not in config:
+    raise ValueError('Missing [database] section in the configuration file')
 
 # Connection parameters
 conn_id = 'my_postgres_connection'
 conn_type = 'postgres'
-host = 'datasource'
-login = 'example_user'
-password = 'example_password'
-schema = 'nbadb'
-port = 5432
 
 session = settings.Session()
 existing_conn = session.query(Connection).filter(Connection.conn_id == conn_id).first()
@@ -28,11 +37,11 @@ else:
     connection = Connection(
         conn_id=conn_id,
         conn_type=conn_type,
-        host=host,
-        login=login,
-        password=password,
-        schema=schema,
-        port=port
+        host=database_host,
+        login=database_user,
+        password=database_password,
+        schema=database_database,
+        port=database_port
     )
 
     session.add(connection)

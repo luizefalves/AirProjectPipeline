@@ -1,9 +1,22 @@
 import psycopg2
+import configparser
+
+# Read the configuration file
+config = configparser.ConfigParser()
+config.read('/opt/airflow/dags/settings.cfg')
+
+# Get the database login information
+database_host = config.get('database', 'host')
+database_port = config.getint('database', 'port')
+database_database = config.get('database', 'database')
+database_user = config.get('database', 'user')
+database_password = config.get('database', 'password')
+
 
 class DatabaseConnector:
     _instance = None
 
-    def __new__(cls, database='nbadb', user='example_user', password='example_password', host='datasource', port='5432'):
+    def __new__(cls, database=database_database, user=database_user, password=database_password, host=database_host, port=database_port):
         """
         Singleton  implementation to ensure only one instance of DatabaseConnector is created
         """

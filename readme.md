@@ -1,7 +1,7 @@
 
-    ----- README NOT MADE YET -----
-
-    --> START WITH "python project_starter.py"
+# THIS README FILE IS NOT COMPLETE
+This project was made for Docker version >= 20.10.16
+### START WITH "python project_starter.py"
     
     
     

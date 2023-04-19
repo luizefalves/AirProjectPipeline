@@ -1,7 +1,21 @@
+import configparser
 import psycopg2
 import json
 from flask import Flask, request, jsonify
 
+# Read the configuration file
+config = configparser.ConfigParser()
+config.read('settings.cfg')
+
+# Get the database login information
+host = config['database']['host']
+port = config['database']['port']
+database = config['database']['database']
+user = config['database']['user']
+password = config['database']['password']
+
+flask_host = config['API']['host']
+flask_port = config['API']['port']
 
 
 
@@ -53,11 +67,11 @@ def hello_world():
 def get_widgets():
     input_string = request.args.get('input_string') 
     conn = psycopg2.connect(
-        dbname="nbadb",
-        user="example_user",
-        password="example_password",
-        host="datasource",
-        port="5432"
+        dbname=database,
+        user=user,
+        password=password,
+        host=host,
+        port=port
     )
     cursor = conn.cursor()
     #cursor.execute("SELECT * FROM transformation_table WHERE column_name = %s", (input_string,))
@@ -79,11 +93,11 @@ def get_widgets():
 @app.route('/query1',  methods=['GET'])
 def db_init():
     conn = psycopg2.connect(
-        dbname="nbadb",
-        user="example_user",
-        password="example_password",
-        host="datasource",
-        port="5432"
+        dbname=database,
+        user=user,
+        password=password,
+        host=host,
+        port=port
     )
     cursor = conn.cursor()
 
@@ -101,4 +115,4 @@ def db_init():
     return json_to_table(row_headers,json_data)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8081)
+    app.run(host=flask_host, port=flask_port)
