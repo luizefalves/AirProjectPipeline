@@ -19,6 +19,15 @@ The project includes:
   - `flask_container_build` creates a REST API with Flask to list the data to the final user
 - A `requirements.txt` file containing the necessary Python dependencies for the DAG.
 
+The project is based on a set of csv tables made available on Kaggle:
+draft_combine_stats, draft_history, game, game_info, game_summary, inactive_players, line_score, officials, other_stats, play_by_play, player, team, team_details, team_history, team_info_common.
+
+From these tables, a sample of three tables is used for data extraction: team_details, and team_info_common.
+
+The team_general table was created from the team_details table, and the team_performance table was created from the team_info_common table. This allowed for the extraction of general team data and performance information.
+
+In the transformation stage, these tables were combined into a third table called transformation_table. This table contains the necessary information for the queries that will be made by the API and displayed in the browser.
+
 ## Usage
 
 To run the project, follow these steps:
@@ -32,6 +41,9 @@ To run the project, follow these steps:
 
 ## Dataset Columns Details    
 -------------------  NOT DONE YET ---------------------
+### You can check the official NBA's statistical terms glossary here: `https://www.nba.com/stats/help/glossary`
+
+
     div_rank - This is a ranking of the team within its division based on its win-loss record compared to other teams in the same division. The NBA has six divisions, and each division has five teams.
 
     pts_rank - This is a ranking of the team's scoring offense based on the average number of points the team scores per game. The ranking is determined by comparing the team's scoring average to that of other teams in the league.

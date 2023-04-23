@@ -5,9 +5,9 @@ from flask import Flask, request, jsonify
 
 # Read the configuration file
 config = configparser.ConfigParser()
-config.read('settings.cfg')
+config.read('/app/settings.cfg')
 
-# Get the database login information
+# # Get the database login information
 host = config['database']['host']
 port = config['database']['port']
 database = config['database']['database']
@@ -42,9 +42,14 @@ def hello_world():
     <html>
     <head>
         <title>My Flask HTML Page</title>
+        <style>
+            body {
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello!</h1>
+        <h1>Welcome to the NBA Project Page</h1>
         <br>
         <p>This is a the main page of the NBA pipeline project.</p>
         <br>        
@@ -101,7 +106,7 @@ def db_init():
     )
     cursor = conn.cursor()
 
-    cursor.execute("SELECT team_division, MAX(pts_rank) as max_pts_rank FROM transformation_table GROUP BY team_division ORDER BY team_division DESC;")
+    cursor.execute("SELECT team_name, team_division, MAX(pts_rank) as max_pts_rank FROM transformation_table GROUP BY team_name, team_division ORDER BY team_division, max_pts_rank DESC;")
     
     row_headers = [desc[0] for desc in cursor.description] # Extract row headers
     
