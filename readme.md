@@ -11,7 +11,7 @@ This is a sample project to illustrate an Airflow DAG pipeline using Docker.
 
 The project includes:
 
-- Docker Compose configuration file to run a PostgreSQL database, an Airflow webserver, an Airflow scheduler,a Flower instance for monitoring tasks and a Flask REST API .
+- Docker Compose configuration file to run a PostgreSQL database for metadata,Redis database as a message broker and task queue, an Airflow webserver, an Airflow scheduler,a Flower instance for monitoring tasks and a Flask REST API .
 - A DAG pipeline with three tasks:
   - `database_ingestion` task creates a table from csv NBA dataset in the PostgreSQL database.
   - `extracting_data` extract data into new tables.
